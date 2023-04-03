@@ -2,5 +2,5 @@ package pl.example;
 
 public interface InjectedBeanService {
 
-    boolean anotherSampleMethod();
+    String anotherSampleMethod(String someValue1, String someValue2);
 }

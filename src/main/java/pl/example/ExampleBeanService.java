@@ -3,7 +3,7 @@ package pl.example;
 
 public interface ExampleBeanService {
 
-    boolean sampleMethod();
+    String sampleMethod(String someValue);
 
     void setInjectedBeanMethod(InjectedBeanService injectedBeanService);
 }

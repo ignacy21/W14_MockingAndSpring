@@ -6,13 +6,12 @@ public class ExampleBeanServiceImpl implements ExampleBeanService {
 
 
     @Override
-    public void setInjectedBeanMethod(InjectedBeanService injectedBeanService) {
-        this.injectedBeanService = injectedBeanService;
+    public String sampleMethod(String someValue) {
+        return injectedBeanService.anotherSampleMethod(someValue, someValue);
     }
 
-
     @Override
-    public boolean sampleMethod() {
-        return injectedBeanService.anotherSampleMethod();
+    public void setInjectedBeanMethod(InjectedBeanService injectedBeanService) {
+        this.injectedBeanService = injectedBeanService;
     }
 }
