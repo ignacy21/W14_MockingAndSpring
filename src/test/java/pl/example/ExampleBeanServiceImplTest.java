@@ -1,15 +1,18 @@
 package pl.example;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.ArgumentMatchers;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.mockito.ArgumentMatchers.*;
+import java.util.stream.Stream;
+
+import static org.mockito.ArgumentMatchers.eq;
 
 @ExtendWith(MockitoExtension.class)
 public class ExampleBeanServiceImplTest {
@@ -19,21 +22,26 @@ public class ExampleBeanServiceImplTest {
     @Mock
     InjectedBeanService injectedBeanService;
 
-    @Test
-    void sampleMethod() {
-        // given
-        Mockito.when(injectedBeanService.anotherSampleMethod(eq("val2"), anyString()))
-                .thenReturn("my value");
-//        Mockito.when(injectedBeanService.anotherSampleMethod(ArgumentMatchers.any(), ArgumentMatchers.any()))
-//                .thenReturn("my value");
+    @ParameterizedTest
+    @MethodSource
+    void sampleMethod(String val1, String val2) {
+//         given
+        Mockito.when(injectedBeanService.someOtherMethod()).thenReturn(val1);
+        Mockito.when(injectedBeanService.anotherSampleMethod()).thenReturn(val2);
 
         // when
-        String result1 = exampleBeanServiceImpl.sampleMethod("val1");
-        String result2 = exampleBeanServiceImpl.sampleMethod("val2");
-        String result3 = exampleBeanServiceImpl.sampleMethod("val3");
-        String result4 = exampleBeanServiceImpl.sampleMethod("val4");
+        String result = exampleBeanServiceImpl.sampleMethod();
 
         // then
-        Assertions.assertEquals("my value", result1);
+
+        Mockito.verify(injectedBeanService, Mockito.times(1)).someOtherMethod();
+    }
+
+    static Stream<Arguments> sampleMethod() {
+        return Stream.of(
+                Arguments.of("val1", "val2"),
+                Arguments.of("val3", "val4"),
+                Arguments.of("val5", "val6")
+        );
     }
 }
