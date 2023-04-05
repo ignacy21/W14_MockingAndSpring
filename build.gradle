@@ -6,7 +6,8 @@ sourceCompatibility = '17'
 
 ext {
     junitVersion = '5.9.1'
-    mockitoVersion = '5.2.0'
+    mockitoVersion = '5.1.0'
+    lombokVersion = '1.18.26'
 }
 
 repositories {
@@ -14,12 +15,21 @@ repositories {
 }
 
 dependencies {
+    // junit
     testImplementation "org.junit.jupiter:junit-jupiter-api:$junitVersion"
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
     testImplementation "org.junit.jupiter:junit-jupiter-params:$junitVersion"
 
+    // mockito
     testImplementation "org.mockito:mockito-junit-jupiter:$mockitoVersion"
+    testImplementation "org.mockito:mockito-inline:$mockitoVersion"
 
+    // lombok
+    compileOnly "org.projectlombok:lombok:$lombokVersion"
+    annotationProcessor "org.projectlombok:lombok:$lombokVersion"
+
+    testCompileOnly "org.projectlombok:lombok:$lombokVersion"
+    testAnnotationProcessor "org.projectlombok:lombok:$lombokVersion"
 }
 
 test {
