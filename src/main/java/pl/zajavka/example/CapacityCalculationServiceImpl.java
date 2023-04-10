@@ -14,7 +14,7 @@ public class CapacityCalculationServiceImpl implements CapacityCalculationServic
     private final DepthCalculationService depthCalculationService;
 
     @Override
-    public BigDecimal someCalculation(InputData inputData) {
+    public BigDecimal someCalculation(final InputData inputData) {
         BigDecimal height = heightCalculationService.calculate(inputData);
         BigDecimal width = widthCalculationService.calculate(inputData);
         BigDecimal depth = depthCalculationService.calculate(inputData);

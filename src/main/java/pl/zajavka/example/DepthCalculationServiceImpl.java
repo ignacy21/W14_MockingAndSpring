@@ -9,6 +9,6 @@ import java.math.BigDecimal;
 public class DepthCalculationServiceImpl implements DepthCalculationService {
     @Override
     public BigDecimal calculate(InputData inputData) {
-        return null;
+        return new BigDecimal(inputData.getDepth());
     }
 }
